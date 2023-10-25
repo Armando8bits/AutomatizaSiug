@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By #necesario para el de arriba
 
 from selenium.webdriver.common.action_chains import ActionChains #para manejar dobleClik
 from selenium.webdriver.common.keys import Keys  #para enviar teclas como ENTER, ESC, etc
+from selenium.webdriver.common.action_chains import ActionChains #para usar teclado directamente en driver y usar bajar pagina y etc
 
 import time
 
@@ -144,3 +145,16 @@ class Accion:
             # devuelve el contenido del input
             Strcadena=input_desabilitado.get_attribute("value")
         return Strcadena 
+    
+    def SetAVPAG(self, driver, Nveces=1):
+        '''Pulsa la tecla AV.PAG un numero de veces configuradas'''
+        actions = ActionChains(driver)
+        for i in range(1, Nveces + 1):
+            actions.send_keys(Keys.PAGE_DOWN).perform()
+
+    def SetFlechaAbajo(self, driver, Nveces=1):
+        '''Pulsa la tecla FLECHA_ABAJO un numero de veces configuradas'''
+        actions = ActionChains(driver)
+        for i in range(1, Nveces + 1):
+            actions.send_keys(Keys.ARROW_DOWN).perform()
+    
