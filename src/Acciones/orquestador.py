@@ -1,8 +1,5 @@
-from src.Modulos.Contratos import contratoReg
-from src.Modulos.Afiliaciones import afiliacionReg, afiliacionEdit
+from src.Modulos import AbrirClaseVirtual
 
 class Orquestador:
     def Dirige(self, driver):
-        #contratoReg.Contrato().Registrar(driver)
-        #afiliacionReg.Afiliacion().Registrar(driver)
-        afiliacionEdit.Afiliacion().Editar(driver)
+        AbrirClaseVirtual.VerHorario().Conectarse(driver)
