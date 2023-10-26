@@ -6,7 +6,51 @@ from selenium.webdriver.support import expected_conditions as EC #necesario para
 from selenium.webdriver.common.by import By #necesario para el de arriba
 
 class VerHorario:
-    def Conectarse(self, driver):
-        #Click en "Consulta Tu horario"
-        Evento.WaitClickUntilVisible_Clikeable(driver,"/html/body/form/div[3]/div[3]/div[2]/div/div[2]/input")
-        #se cambia a nueva pagina del horiario... falta codificar desde aquí...
+    def Conectarse(self, driver, Carrera, Curso):
+        Continuar=""
+        while Continuar=="":
+            #cierra modal del inicio
+            Evento.WaitClickUntilVisible_Clikeable(driver,"/html/body/form/div[3]/div[3]/div[1]/div[2]/div/div[1]/button")
+            #Click en "Consulta Tu horario"
+            Evento.WaitClickUntilVisible_Clikeable(driver,"/html/body/form/div[3]/div[3]/div[2]/div/div[2]/input")
+            #se cambia a nueva pagina del horiario... y
+            #selecciona Carrera:
+            Element=WebDriverWait(driver,30).until(EC.visibility_of_element_located((By.XPATH,"/html/body/form/div[3]/div[3]/div[2]/table/tbody/tr[2]/td[2]/table/tbody/tr[2]/td[2]/select")))
+            #Element.click()
+            options = Element.find_elements(By.TAG_NAME, 'option')
+            for option in options:
+                if Carrera in option.text: #comprueba si el texto de cada elemento contiene la cadena
+                    option.click()
+                    break
+            
+            #espera que desaparezca el spinner
+            WebDriverWait(driver,90).until(EC.invisibility_of_element((By.XPATH,"/html/body/form/div[3]/div[3]/div[1]")))
+            
+            #selecciona Curso:
+            Element=WebDriverWait(driver,30).until(EC.element_to_be_clickable((By.XPATH,"/html/body/form/div[3]/div[3]/div[2]/table/tbody/tr[2]/td[2]/table/tbody/tr[4]/td[2]/select")))
+            #Element.click()
+            options = Element.find_elements(By.TAG_NAME, 'option')
+            for option in options:
+                if Curso in option.text: #comprueba si el texto de cada elemento contiene la cadena
+                    option.click()
+                    break
+
+            #espera que desaparezca el spinner
+            WebDriverWait(driver,90).until(EC.invisibility_of_element((By.XPATH,"/html/body/form/div[3]/div[3]/div[1]")))
+            
+            #click en boton "Clases Virtuales"
+            driver.find_element(By.XPATH,"/html/body/form/div[3]/div[3]/div[2]/table/tbody/tr[4]/td[2]/div/div[1]/a").click()
+
+            try:
+                #esperar a que cargue la pagina (que encuentre el botón)
+                Element = WebDriverWait(driver,90,1).until(EC.element_to_be_clickable((By.ID,"btnIrReunion")))
+                url = Element.get_attribute('data-url') #obtengo el link del zoom meeting
+                pos = url.find('?') #Encuentra la ubicación del '?'
+
+                Element.click()
+                print("****Link de Zoom: "+ url[:pos]) #imprime link hasta antes de '?'
+            except:
+                Continuar=input("\n***Parece que no es hora de la clase, ¿Volver a Utilizar?\n\tPulse Enter para continuar...\n\tPulse cualquier letra seguido de enter para concluir...")
+                if Continuar=="":
+                    driver.back()
+                    driver.back() #retrocede hacia atrás dos veces para iniciar nuevamente 
