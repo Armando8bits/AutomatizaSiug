@@ -19,6 +19,16 @@ class Accion:
             )
         elements[0].click()
 
+    def WaitClickUntilVisible_ClikeableByClassName(self,driver,strClassName):
+        elements= WebDriverWait(driver,90,1).until(
+            EC.all_of(
+            EC.visibility_of_element_located((By.CLASS_NAME,strClassName))
+            ,
+            EC.element_to_be_clickable((By.CLASS_NAME,strClassName))
+            )
+            )
+        elements[0].click()
+
     def WaitSendkeysUntilVisible_Clikeable(self,driver,strXXpath,Teclas):
         elements= WebDriverWait(driver,90,1).until(
             EC.all_of(

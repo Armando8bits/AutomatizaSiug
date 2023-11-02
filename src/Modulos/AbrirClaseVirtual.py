@@ -10,7 +10,8 @@ class VerHorario:
         Continuar=""
         while Continuar=="":
             #cierra modal del inicio
-            Evento.WaitClickUntilVisible_Clikeable(driver,"/html/body/form/div[3]/div[3]/div[1]/div[2]/div/div[1]/button")
+            #Evento.WaitClickUntilVisible_Clikeable(driver,"/html/body/form/div[3]/div[3]/div[1]/div/div/div[1]/button")
+            Evento.WaitClickUntilVisible_ClikeableByClassName(driver,"close") #modifican la pagina con frecuencia, entonces es mejor buscarlo por classname
             #Click en "Consulta Tu horario"
             Evento.WaitClickUntilVisible_Clikeable(driver,"/html/body/form/div[3]/div[3]/div[2]/div/div[2]/input")
             #se cambia a nueva pagina del horiario... y
@@ -49,6 +50,7 @@ class VerHorario:
 
                 Element.click()
                 print("****Link de Zoom: "+ url[:pos]) #imprime link hasta antes de '?'
+                break #rompe el bucle si se llega a ejecutar hasta aqui
             except:
                 Continuar=input("\n***Parece que no es hora de la clase, ¿Volver a Utilizar?\n\tPulse Enter para continuar...\n\tPulse cualquier letra seguido de enter para concluir...")
                 if Continuar=="":
