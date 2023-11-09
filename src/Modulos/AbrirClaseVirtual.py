@@ -5,6 +5,8 @@ from selenium.webdriver.support.ui import WebDriverWait #para esperar el element
 from selenium.webdriver.support import expected_conditions as EC #necesario para el de arriba
 from selenium.webdriver.common.by import By #necesario para el de arriba
 
+import time
+
 class VerHorario:
     def Conectarse(self, driver, Carrera, Curso):
         Continuar=""
@@ -50,6 +52,11 @@ class VerHorario:
 
                 Element.click()
                 print("****Link de Zoom: "+ url[:pos]) #imprime link hasta antes de '?'
+                #espera que la pagina se cargue en su totalidad
+                WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, 'body')))
+                #maneja el "OS App Selector" por teclado
+                Evento.SetTab(driver,2) #toca tab 2 veces
+                Evento.SetEnter(driver) #toca enter
                 break #rompe el bucle si se llega a ejecutar hasta aqui
             except:
                 Continuar=input("\n***Parece que no es hora de la clase, ¿Volver a Utilizar?\n\tPulse Enter para continuar...\n\tPulse cualquier letra seguido de enter para concluir...")

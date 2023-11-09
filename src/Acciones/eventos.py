@@ -167,4 +167,20 @@ class Accion:
         actions = ActionChains(driver)
         for i in range(1, Nveces + 1):
             actions.send_keys(Keys.ARROW_DOWN).perform()
-    
+
+    def SetTab(self, driver, Nveces=1):
+        '''Pulsa la tecla TAB un numero de veces configuradas'''
+        actions = ActionChains(driver)
+        for i in range(1, Nveces + 1):
+            actions.send_keys(Keys.TAB).perform()
+        '''segun un sitio se maneja asi:
+            keyboard.send("tab",do_press=True,do_release=True)
+            keyboard.send("tab",do_press=True,do_release=True)
+            keyboard.send("tab",do_press=True,do_release=True)
+            keyboard.send("enter",do_press=True,do_release=True)'''
+
+    def SetEnter(self, driver, Nveces=1):
+        '''Pulsa la tecla ENTER un numero de veces configuradas'''
+        actions = ActionChains(driver)
+        for i in range(1, Nveces + 1):
+            actions.send_keys(Keys.ENTER).perform()
