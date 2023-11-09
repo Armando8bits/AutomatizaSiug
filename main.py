@@ -7,8 +7,9 @@ from selenium.webdriver.chrome.service import Service as ChromeService #para no 
 from webdriver_manager.chrome import ChromeDriverManager
 
 if credencial.Credencial.EsValida(): #si las credenciales son validas, inicia
-    #print(str(Credencial.GetUsuario())+" - "+str(Credencial.GetPasswor()))
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--disable-default-apps")
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
     driver.maximize_window() #creo que es obvio lo que hace
     driver.get("https://servicioenlinea.ug.edu.ec/SIUG/Account/Login.aspx")
 
