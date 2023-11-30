@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC #necesario para
 from selenium.webdriver.common.by import By #necesario para el de arriba
 
 import pyautogui #para manejo de teclado o mouse
+import time
 
 class VerHorario:
     def Conectarse(self, driver, Carrera, Curso):
@@ -55,6 +56,7 @@ class VerHorario:
                 #espera que la pagina se cargue en su totalidad
                 WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, 'body')))
                 #maneja el "OS App Selector" por teclado
+                time.sleep(1)
                 pyautogui.press('tab') #toca tab 2 veces
                 pyautogui.press('tab') #toca tab 2 veces
                 pyautogui.press('enter') #toca enter
