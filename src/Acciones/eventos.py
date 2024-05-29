@@ -17,6 +17,16 @@ class Accion:
                 )
             elements[0].send_keys(Teclas)
 
+        def WaitSendkeysUntilVisible_Clikeable_id(self,driver,strID,Teclas):
+            elements= WebDriverWait(driver,90,1).until(
+                EC.all_of(
+                EC.visibility_of_element_located((By.ID,strID))
+                ,
+                EC.element_to_be_clickable((By.ID,strID))
+                )
+                )
+            elements[0].send_keys(Teclas)
+
         def SetAVPAG(self, driver, Nveces=1):
             '''Pulsa la tecla AV.PAG un numero de veces configuradas'''
             actions = ActionChains(driver)

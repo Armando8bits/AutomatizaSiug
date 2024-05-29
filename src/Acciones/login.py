@@ -11,20 +11,20 @@ from selenium.webdriver.common.keys import Keys  #para enviar teclas como ENTER,
 class Sesion:
     def iniciar(self, driver,usuari,passwd,Fecme,Fecdi):
         #ingresa usuario
-        WebDriverWait(driver,30).until(EC.element_to_be_clickable((By.XPATH,"/html/body/form/div[3]/div[3]/div[1]/div[3]/div/div/div/div/center/div/div[3]/div[1]/div[2]/div/div/div[2]/div[1]/input")))\
+        WebDriverWait(driver,30).until(EC.element_to_be_clickable((By.ID ,"MainContent_LoginUser_UserName")))\
             .send_keys(str(usuari))
-        WebDriverWait(driver,30).until(EC.element_to_be_clickable((By.XPATH,"/html/body/form/div[3]/div[3]/div[1]/div[3]/div/div/div/div/center/div/div[3]/div[1]/div[2]/div/div/div[2]/div[1]/input"))).send_keys(Keys.TAB)
+        WebDriverWait(driver,30).until(EC.element_to_be_clickable((By.ID,"MainContent_LoginUser_UserName"))).send_keys(Keys.TAB)
         #ingresa contraseña
         time.sleep(0.5)
-        Evento.WaitSendkeysUntilVisible_Clikeable(driver,"/html/body/form/div[3]/div[3]/div[1]/div[3]/div/div/div/div/center/div/div[3]/div[1]/div[2]/div/div/div[2]/div[2]/input",
+        Evento.WaitSendkeysUntilVisible_Clikeable_id(driver,"MainContent_LoginUser_Password",
             str(passwd) )
         #ingresa mes
-        WebDriverWait(driver,30,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/form/div[3]/div[3]/div[1]/div[3]/div/div/div/div/center/div/div[3]/div[1]/div[2]/div/div/div[2]/div[3]/div[2]/div[1]/input")))\
+        WebDriverWait(driver,30,2).until(EC.element_to_be_clickable((By.ID,"MainContent_LoginUser_TXT_MES")))\
             .send_keys(str(Fecdi))
         #ingresa dia
-        WebDriverWait(driver,30,2).until(EC.element_to_be_clickable((By.XPATH,"/html/body/form/div[3]/div[3]/div[1]/div[3]/div/div/div/div/center/div/div[3]/div[1]/div[2]/div/div/div[2]/div[3]/div[2]/div[3]/input")))\
+        WebDriverWait(driver,30,2).until(EC.element_to_be_clickable((By.ID,"MainContent_LoginUser_TXT_DIA")))\
             .send_keys(str(Fecme))
         #baja la pagina para poder trabajar los controles:
         Evento.SetFlechaAbajo(driver) #baja la pagina 
         #da click en iniciar sesión
-        WebDriverWait(driver,30).until(EC.element_to_be_clickable((By.XPATH,"/html/body/form/div[3]/div[3]/div[1]/div[3]/div/div/div/div/center/div/div[3]/div[1]/div[2]/div/div/div[2]/div[4]/input"))).click()
+        WebDriverWait(driver,30).until(EC.element_to_be_clickable((By.ID,"MainContent_LoginUser_LoginButton"))).click()
