@@ -20,10 +20,10 @@ class Sesion:
             str(passwd) )
         #ingresa mes
         WebDriverWait(driver,30,2).until(EC.element_to_be_clickable((By.ID,"MainContent_LoginUser_TXT_MES")))\
-            .send_keys(str(Fecdi))
+            .send_keys(str(Fecme))
         #ingresa dia
         WebDriverWait(driver,30,2).until(EC.element_to_be_clickable((By.ID,"MainContent_LoginUser_TXT_DIA")))\
-            .send_keys(str(Fecme))
+            .send_keys(str(Fecdi))
         #baja la pagina para poder trabajar los controles:
         Evento.SetFlechaAbajo(driver) #baja la pagina 
         #da click en iniciar sesión
