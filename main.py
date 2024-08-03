@@ -17,7 +17,11 @@ while True:
             ya que el perfil de incognito no guarda cookies ni historial de navegación. en lugar de usar el argumento "--ignore-certificate-errors"
             al inicio de Chrome, lo que le indicará que ignore cualquier error relacionado con los certificados SSL. pero este último no es recomendado
             ya que una práctica insegura y no se recomienda, ya que expone su conexión a posibles ataques y robo de datos. '''
-            driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+            chromedriver_path = ChromeDriverManager().install()
+            #print(chromedriver_path)
+            if 'THIRD_PARTY_NOTICES.chromedriver' in chromedriver_path:
+                chromedriver_path = chromedriver_path.replace('THIRD_PARTY_NOTICES.chromedriver', 'chromedriver.exe')
+            driver = webdriver.Chrome(service=ChromeService(chromedriver_path), options=options)
             driver.maximize_window() #creo que es obvio lo que hace
             driver.get("https://servicioenlinea.ug.edu.ec/SIUG/Account/Login.aspx")
 
